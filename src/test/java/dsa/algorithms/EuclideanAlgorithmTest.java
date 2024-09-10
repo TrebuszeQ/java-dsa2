@@ -5,8 +5,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class EuklideeAlgorithmTest extends TestCase implements IEuklideeAlgorithm {
-    public EuklideeAlgorithmTest(String testName) {
+public class EuclideanAlgorithmTest extends TestCase {
+    public EuclideanAlgorithmTest(String testName) {
         super(testName);
     }
 
@@ -14,9 +14,9 @@ public class EuklideeAlgorithmTest extends TestCase implements IEuklideeAlgorith
         return new TestSuite(AppTest.class);
     }
 
-    public void testEuklideeAlgorithm() {
+    public void testEuclideanAlgorithm() {
         int p = 10;
         int q = 5;
-        assertEquals(euklideeAlgorithmRecursive(p, q), 5);
+        assertEquals(EuclideanAlgorithm.euclideanAlgorithmRecursive(p, q), 5);
     }
 }
