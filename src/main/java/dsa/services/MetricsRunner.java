@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class MetricsRunner {
     public MetricsRunner() {}
 
-    public <T> T measuredRun(Function<T, T> func, T input) {
+    public static <T> T measuredRun(Function<T, T> func, T input) {
         log.info("Measuring running time");
         Instant now = Instant.now();
         T result = func.apply(input);

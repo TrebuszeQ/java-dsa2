@@ -22,5 +22,4 @@ public final class Randomizer {
 
         return double2DArray;
     }
-
 }

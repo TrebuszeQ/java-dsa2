@@ -12,12 +12,23 @@ public final class Matrix {
     public int n;
     public double[][] matrix;
 
-    public Matrix(double[][] matrix) {
-        this.matrix = matrix;
-        this.m = matrix.length;
+    public Matrix(double[][] array2d) {
+        this.matrix = array2d;
+        this.m = array2d.length;
+        this.setN();
     }
 
-    public double product(double[] x, double[] y) {
-        return 2.5;
+    private void setN() {
+        if (matrix.length > 0) n = matrix[0].length;
+    }
+
+    public double[][] product(double num) {
+        double[][] result = new double[m][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                result[j][i] = num * matrix[i][j];
+            }
+        }
+        return result;
     }
 }
