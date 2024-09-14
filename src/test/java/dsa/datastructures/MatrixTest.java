@@ -13,8 +13,6 @@ import java.util.function.Function;
 
 @Slf4j
 public class MatrixTest extends TestCase {
-    double[][] matrixArr = Randomizer.double2DArray(3, 4);
-    Matrix matrix = new Matrix(matrixArr);
 
     public MatrixTest(String testName) {
         super(testName);
@@ -24,11 +22,6 @@ public class MatrixTest extends TestCase {
         return new TestSuite(AppTest.class);
     }
 
-    public void testMatrixConstructorValid() {
-        assertEquals(matrix.matrix, matrixArr);
-        assertEquals(matrix.m, 3);
-        assertEquals(matrix.n, 4);
-    }
 
     public void testProductValid() {
         double num = 3.14;
@@ -37,14 +30,14 @@ public class MatrixTest extends TestCase {
             {1, 1, 1},
             {1, 1, 1}
         };
-        Matrix matrix = new Matrix(matrixArr);
-        MetricsRunner.measuredRun(matrix.product, );
-        double[][] product = matrix.product(num);
+
+        Function<double[][], double[][]> func = (input) -> Matrix.product(input, num);
+        double[][] product = MetricsRunner.measuredRun(func, matrixArr);
         double[][] expectedProduct = {
-                {3,14, 3,14, 3,14},
-                {3,14, 3,14, 3,14},
-                {3,14, 3,14, 3,14}
+                {3.14, 3.14, 3.14},
+                {3.14, 3.14, 3.14},
+                {3.14, 3.14, 3.14}
         };
-        assertEquals(product, expectedProduct);
+        assertTrue(Arrays.deepEquals(product, expectedProduct));
     }
 }

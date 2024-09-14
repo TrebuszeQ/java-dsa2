@@ -8,27 +8,61 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class Matrix {
-    public int m;
-    public int n;
-    public double[][] matrix;
 
-    public Matrix(double[][] array2d) {
-        this.matrix = array2d;
-        this.m = array2d.length;
-        this.setN();
+    private Matrix() {}
+
+
+    public static int get_n(double[][] matrix) {
+        int n;
+        if (matrix.length > 0) {
+            n = matrix[0].length;
+            return n;
+        }
+        else {
+            log.error("Matrix is empty");
+            return 0;
+        }
     }
 
-    private void setN() {
-        if (matrix.length > 0) n = matrix[0].length;
-    }
+    public static double[][] product(double[][] matrix, double num) {
+        int m = matrix.length;
+        int n = get_n(matrix);
 
-    public double[][] product(double num) {
         double[][] result = new double[m][n];
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 result[j][i] = num * matrix[i][j];
             }
         }
+
         return result;
     }
+
+    public static double[][] matrice_sum(double[][] a, double[][] b) {
+        int m = a.length;
+        int mb = b.length;
+        if (m != mb) {
+            log.error("Matrices have different sizes");
+            return null;
+        }
+
+        int n = get_n(a);
+        int nb = get_n(b);
+        if (n != nb) {
+            log.error("Matrices have different sizes");
+            return null;
+        }
+        
+        double[][] result = new double[m][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                result[i][j] = a[j][i] + b[j][i];
+            }
+        }
+
+        return result;
+    }
+
 }

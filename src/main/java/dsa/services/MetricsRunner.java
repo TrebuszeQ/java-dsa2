@@ -14,9 +14,8 @@ public class MetricsRunner {
         log.info("Measuring running time");
         Instant now = Instant.now();
         T result = func.apply(input);
-        Instant later = Instant.now();
-        Duration delta = Duration.between(now, later);
-        log.info("Function ran for {} ms", delta.toMillis());
+        Duration delta = Duration.between(now, Instant.now());
+        log.info("Function ran for {} ms", delta.toNanos()/1000000.0);
         return result;
     }
 }
