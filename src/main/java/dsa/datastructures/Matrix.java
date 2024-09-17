@@ -24,7 +24,25 @@ public final class Matrix {
         }
     }
 
-    public static double[][] product(double[][] matrix, double num) {
+    public static boolean areMatricesEqual(double[][] a, double[][] b) {
+        int m = a.length;
+        int mb = b.length;
+        if (m != mb) {
+            log.error("Matrices have different sizes");
+            return true;
+        }
+
+        int n = get_n(a);
+        int nb = get_n(b);
+        if (n != nb) {
+            log.error("Matrices have different sizes");
+            return true;
+        }
+
+        return false;
+    }
+
+    public static double[][] matrixProduct(double[][] matrix, double num) {
         int m = matrix.length;
         int n = get_n(matrix);
 
@@ -39,30 +57,39 @@ public final class Matrix {
         return result;
     }
 
-    public static double[][] matrice_sum(double[][] a, double[][] b) {
+    public static double[][] matricesSum(double[][] a, double[][] b) {
+        if (areMatricesEqual(a, b)) return null;
         int m = a.length;
-        int mb = b.length;
-        if (m != mb) {
-            log.error("Matrices have different sizes");
-            return null;
-        }
-
         int n = get_n(a);
-        int nb = get_n(b);
-        if (n != nb) {
-            log.error("Matrices have different sizes");
-            return null;
-        }
         
         double[][] result = new double[m][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                result[i][j] = a[j][i] + b[j][i];
+                result[i][j] = a[i][j] + b[i][j];
             }
         }
 
         return result;
     }
 
+    public static double[][] matricesDifference(double[][] a, double[][] b) {
+        if (areMatricesEqual(a, b)) return null;
+        int m = a.length;
+        int n = get_n(a);
+
+        double[][] result = new double[m][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                result[i][j] = a[i][j] - b[i][j];
+            }
+        }
+
+        return result;
+    }
+
+    public static double[][] matricesProduct(double[][] a, double[][] b) {
+
+    }
 }
