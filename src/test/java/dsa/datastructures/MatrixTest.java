@@ -84,4 +84,19 @@ public class MatrixTest extends TestCase {
         };
         assertTrue(Arrays.deepEquals(diff, expectedProduct));
     }
+
+    public void testMatricesProductValid() {
+        double[][] matrixArrA = {
+                {1, 1, 1},
+                {1, 1, 1},
+                {1, 1, 1},
+        };
+        double[][] matrixArrB = {
+                {1, 2, 1, 2, },
+                {1, 1, 1}
+        };
+
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
+        double
+    }
 }
