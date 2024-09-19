@@ -9,10 +9,46 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class Matrix {
 
-    private Matrix() {}
+    private Matrix() {
+        throw new UnsupportedOperationException("Cannot instantiate utility class");
+    }
 
+    public static boolean isMatrix(double[][] array) {
+        if (isMatrixEmpty(array)) {
+            log.error("Not a matrix");
+            return false;
+        }
+
+        for (double[] doubles : array) {
+            if (doubles.length != array[0].length) {
+                log.error("Not a matrix");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isMatrixEmpty(double[][] array) {
+        if (array == null) {
+            log.error("Array is null");
+            return true;
+        }
+
+        if (array.length == 0) {
+            log.error("Array has no rows");
+            return true;
+        }
+
+        if (array[0].length == 0) {
+            log.error("Array has no columns");
+        }
+
+        return false;
+    }
 
     public static boolean areMatricesEqual(double[][] a, double[][] b) {
+        if (isMatrixEmpty(a) || isMatrixEmpty(b)) return false;
         int m = a.length;
         int mb = b.length;
         if (m != mb) {
@@ -40,6 +76,8 @@ public final class Matrix {
     }
 
     public static double[][] matrixProduct(double[][] matrix, double num) {
+        if (isMatrixEmpty(matrix)) return null;
+
         int m = matrix.length;
         int n = matrix[0].length;
 
@@ -87,14 +125,19 @@ public final class Matrix {
     }
 
     public static double[][] matricesProduct(double[][] a, double[][] b) {
+        if (isMatrixEmpty(a) || isMatrixEmpty(b)) return null;
+
         int m = a.length;
-        
         int n = a[0].length;
+
         int mB = b.length;
+
         if (mB != n) {
-            log.error("Matrix a columns has to equal matrix b rows");
+            log.error("Matrix A columns length doesn't equal matrix B rows length");
             return null;
         }
+
+        int nB = b[0].length;
 
         double[][] result = new double[m][nB];
 

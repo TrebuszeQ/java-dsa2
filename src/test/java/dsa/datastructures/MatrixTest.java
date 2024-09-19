@@ -22,6 +22,14 @@ public class MatrixTest extends TestCase {
         return new TestSuite(AppTest.class);
     }
 
+    public void testIsMatrixInvalid() {
+        double[][] matrixArr = {
+                {1},
+                {1, 2},
+                {1, 2, 3}
+        };
+        assertFalse(Matrix.isMatrix(matrixArr));
+    }
 
     public void testMatrixProductValid() {
         double num = 3.14;
@@ -87,16 +95,20 @@ public class MatrixTest extends TestCase {
 
     public void testMatricesProductValid() {
         double[][] matrixArrA = {
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1},
+                {1, 2},
+                {3, 4},
         };
         double[][] matrixArrB = {
-                {1, 2, 1, 2, },
-                {1, 1, 1}
+                {1, 0},
+                {-1, 5}
         };
 
         BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
-        double
+        double[][] result = MetricsRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] expectedProduct = {
+                {-1, 10},
+                {-1, 20}
+        };
+        assertTrue(Arrays.deepEquals(result, expectedProduct));
     }
 }
