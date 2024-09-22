@@ -47,8 +47,12 @@ public final class Matrix {
         return false;
     }
 
+    /** Checks if matrices are not empty and not null matrices, and if those are equal..
+     *
+     */
     public static boolean areMatricesEqual(double[][] a, double[][] b) {
-        if (isMatrixEmpty(a) || isMatrixEmpty(b)) return false;
+
+        if (!isMatrix(a) || !isMatrix(b)) return false;
         int m = a.length;
         int mb = b.length;
         if (m != mb) {
@@ -76,7 +80,7 @@ public final class Matrix {
     }
 
     public static double[][] matrixProduct(double[][] matrix, double num) {
-        if (isMatrixEmpty(matrix)) return null;
+        if (!isMatrix(matrix)) return null;
 
         int m = matrix.length;
         int n = matrix[0].length;
@@ -125,7 +129,7 @@ public final class Matrix {
     }
 
     public static double[][] matricesProduct(double[][] a, double[][] b) {
-        if (isMatrixEmpty(a) || isMatrixEmpty(b)) return null;
+        if (!isMatrix(a) || !isMatrix(b)) return null;
 
         int m = a.length;
         int n = a[0].length;
@@ -143,10 +147,18 @@ public final class Matrix {
 
         for (int i = 0; i < m; i ++) {
             for (int j = 0; j < nB; j++) {
-                result[i][j] = a[i][j] * b[i][j];
+                for (double rowNum : a[i]) {
+                    int k = 0;
+                    result[i][j] += b[i + 1][j];
+                    for (double colNum : )
+                }
+                log.info("{} + {}", a[i][j], b[i + 1][j]);
+                result[i][j] = num;
             }
         }
 
         return result;
     }
+
+    // a[0][0] * b[0][0] + a[0][1] * b[1][0]
 }
