@@ -2,6 +2,9 @@ package dsa.datastructures;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Mathematical matrix where m stands for rows and n stands for columns.
  * */
@@ -145,20 +148,7 @@ public final class Matrix {
 
         double[][] result = new double[m][nB];
 
-        for (int i = 0; i < m; i ++) {
-            for (int j = 0; j < nB; j++) {
-                for (double rowNum : a[i]) {
-                    int k = 0;
-                    result[i][j] += b[i + 1][j];
-                    for (double colNum : )
-                }
-                log.info("{} + {}", a[i][j], b[i + 1][j]);
-                result[i][j] = num;
-            }
-        }
-
+        
         return result;
     }
-
-    // a[0][0] * b[0][0] + a[0][1] * b[1][0]
 }
