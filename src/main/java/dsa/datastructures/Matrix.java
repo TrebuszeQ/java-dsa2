@@ -148,7 +148,34 @@ public final class Matrix {
 
         double[][] result = new double[m][nB];
 
+        for (int i = 0; i < m; i++) {
+
+            for (int j = 0; j < nB; j++) {
+                double sum = getSum(a[i], );
+                log.info("{}", sum);
+                result[i][j] = sum;
+            }
+        }
         
         return result;
     }
+
+    private static double getSum(double[] aRow, double[] bCol) {
+        double sum = 0;
+        for (int i = 0; i < aRow.length; i++) {
+            sum += aRow[i] * bCol[i];
+        }
+
+        return sum;
+    }
 }
+
+// a[0][0] = a[0][0] * b[0][1] + a[1][0] * b[0][1]
+// a[1][0] = a[0][0] * b[0][1] + a[1][0] * b[1][1]
+// a[0][1] = a[0][1] * b[0][0] + a[1][1] * b[0][1]
+// a[1][1] = a[0][1] * b[1][0] + a[1][1] * b[1][1]
+//                         {1, 0},
+////                       {-1, 5}
+//                {1, 2}
+//                {3, 4}
+//                  1 * 1 + 2 * -1
