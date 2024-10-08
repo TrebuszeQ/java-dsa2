@@ -149,11 +149,14 @@ public final class Matrix {
         double[][] result = new double[m][nB];
 
         for (int i = 0; i < m; i++) {
+            int colIndex = 0;
 
             for (int j = 0; j < nB; j++) {
-                double sum = getSum(a[i], );
+                double[] bColumn = getColumn(b, colIndex);
+                double sum = getSum(a[i], bColumn);
                 log.info("{}", sum);
                 result[i][j] = sum;
+                colIndex += 1;
             }
         }
         
@@ -167,6 +170,15 @@ public final class Matrix {
         }
 
         return sum;
+    }
+
+    private static double[] getColumn(double[][] arr, int colIndex) {
+        double[] column = new double[arr.length];
+        for (int i = colIndex; i < arr.length; i++) {
+            column[i] = arr[i][colIndex];
+        }
+
+        return column;
     }
 }
 
