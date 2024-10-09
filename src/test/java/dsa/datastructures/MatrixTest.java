@@ -1,7 +1,7 @@
 package dsa.datastructures;
 
 import dsa.AppTest;
-import dsa.services.MetricsRunner;
+import dsa.services.TimingRunner;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -40,7 +40,7 @@ public class MatrixTest extends TestCase {
         };
 
         Function<double[][], double[][]> func = (input) -> Matrix.matrixProduct(input, num);
-        double[][] product = MetricsRunner.measuredRun(func, matrixArr);
+        double[][] product = TimingRunner.measuredRun(func, matrixArr);
         double[][] expectedProduct = {
                 {3.14, 3.14, 3.14},
                 {3.14, 3.14, 3.14},
@@ -62,7 +62,7 @@ public class MatrixTest extends TestCase {
         };
 
         BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesSum;
-        double[][] sum = MetricsRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] sum = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {2, 3, 4},
                 {2, 2, 2},
@@ -84,7 +84,7 @@ public class MatrixTest extends TestCase {
         };
 
         BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesDifference;
-        double[][] diff = MetricsRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] diff = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {0, 0, 0},
                 {0, 0, 0},
@@ -104,10 +104,30 @@ public class MatrixTest extends TestCase {
         };
 
         BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
-        double[][] result = MetricsRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {-1, 10},
                 {-1, 20}
+        };
+        assertTrue(Arrays.deepEquals(result, expectedProduct));
+    }
+
+    public void testMatricesProductValid2() {
+        double[][] matrixArrA = {
+                {2, 1, 0},
+                {4, 0, 2}
+        };
+        double[][] matrixArrB = {
+                {1, 0, 2, 1},
+                {0, 1, 0, 3},
+                {2, 0, 1, 5}
+        };
+
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
+        double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] expectedProduct = {
+                {2, 1, 4, 5},
+                {8, 0, 10, 14}
         };
         assertTrue(Arrays.deepEquals(result, expectedProduct));
     }
