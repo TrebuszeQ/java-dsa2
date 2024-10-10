@@ -31,7 +31,7 @@ public class MatrixTest extends TestCase {
         assertFalse(Matrix.isMatrix(matrixArr));
     }
 
-    public void testMatrixProductValid() {
+    public void testProductValid() {
         double num = 3.14;
         double[][] matrixArr = {
             {1, 1, 1},
@@ -39,7 +39,7 @@ public class MatrixTest extends TestCase {
             {1, 1, 1}
         };
 
-        Function<double[][], double[][]> func = (input) -> Matrix.matrixProduct(input, num);
+        Function<double[][], double[][]> func = (input) -> Matrix.product(input, num);
         double[][] product = TimingRunner.measuredRun(func, matrixArr);
         double[][] expectedProduct = {
                 {3.14, 3.14, 3.14},
@@ -49,7 +49,7 @@ public class MatrixTest extends TestCase {
         assertTrue(Arrays.deepEquals(product, expectedProduct));
     }
 
-    public void testMatricesSumValid() {
+    public void testSumValid() {
         double[][] matrixArrA = {
                 {1, 1, 1},
                 {1, 1, 1},
@@ -61,7 +61,7 @@ public class MatrixTest extends TestCase {
                 {3, 2, 1},
         };
 
-        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesSum;
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::sum;
         double[][] sum = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {2, 3, 4},
@@ -71,7 +71,7 @@ public class MatrixTest extends TestCase {
         assertTrue(Arrays.deepEquals(sum, expectedProduct));
     }
 
-    public void testMatricesDifferenceValid() {
+    public void testDifferenceValid() {
         double[][] matrixArrA = {
                 {1, 1, 1},
                 {1, 1, 1},
@@ -83,7 +83,7 @@ public class MatrixTest extends TestCase {
                 {1, 1, 1},
         };
 
-        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesDifference;
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::difference;
         double[][] diff = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {0, 0, 0},
@@ -93,7 +93,7 @@ public class MatrixTest extends TestCase {
         assertTrue(Arrays.deepEquals(diff, expectedProduct));
     }
 
-    public void testMatricesProductValid() {
+    public void testProductValid2() {
         double[][] matrixArrA = {
                 {1, 2},
                 {3, 4},
@@ -103,7 +103,7 @@ public class MatrixTest extends TestCase {
                 {-1, 5}
         };
 
-        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::product;
         double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {-1, 10},
@@ -112,7 +112,7 @@ public class MatrixTest extends TestCase {
         assertTrue(Arrays.deepEquals(result, expectedProduct));
     }
 
-    public void testMatricesProductValid2() {
+    public void testProductValid3() {
         double[][] matrixArrA = {
                 {2, 1, 0},
                 {4, 0, 2}
@@ -123,12 +123,26 @@ public class MatrixTest extends TestCase {
                 {2, 0, 1, 5}
         };
 
-        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::matricesProduct;
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::product;
         double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
         double[][] expectedProduct = {
                 {2, 1, 4, 5},
                 {8, 0, 10, 14}
         };
         assertTrue(Arrays.deepEquals(result, expectedProduct));
+    }
+    
+    public void testPowerValid() {
+        double[][] matrixArrA = {
+                {2, -1},
+                {3, 0}
+        };
+
+        BiFunction<double[][], Integer, double[][]> biFunc = Matrix::power;
+        double[][] result = TimingRunner.measuredRun(biFunc, new Integer(2), matrixArrA);
+        double[][] expectedResult = {
+                {1, -2},
+                {6, -3}
+        };
     }
 }

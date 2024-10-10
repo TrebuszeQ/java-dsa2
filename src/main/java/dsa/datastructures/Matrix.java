@@ -2,9 +2,6 @@ package dsa.datastructures;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
  * Mathematical matrix where m stands for rows and n stands for columns.
  * */
@@ -17,7 +14,7 @@ public final class Matrix {
     }
 
     public static boolean isMatrix(double[][] array) {
-        if (isMatrixEmpty(array)) {
+        if (isEmpty(array)) {
             log.error("Not a matrix");
             return false;
         }
@@ -32,7 +29,7 @@ public final class Matrix {
         return true;
     }
 
-    public static boolean isMatrixEmpty(double[][] array) {
+    public static boolean isEmpty(double[][] array) {
         if (array == null) {
             log.error("Array is null");
             return true;
@@ -53,7 +50,7 @@ public final class Matrix {
     /** Checks if matrices are not empty and not null matrices, and if those are equal..
      *
      */
-    public static boolean areMatricesEqual(double[][] a, double[][] b) {
+    public static boolean areEqual(double[][] a, double[][] b) {
 
         if (!isMatrix(a) || !isMatrix(b)) return false;
         int m = a.length;
@@ -82,7 +79,7 @@ public final class Matrix {
         return equal;
     }
 
-    public static double[][] matrixProduct(double[][] matrix, double num) {
+    public static double[][] product(double[][] matrix, double num) {
         if (!isMatrix(matrix)) return null;
 
         int m = matrix.length;
@@ -99,8 +96,8 @@ public final class Matrix {
         return result;
     }
 
-    public static double[][] matricesSum(double[][] a, double[][] b) {
-        if (!areMatricesEqual(a, b)) return null;
+    public static double[][] sum(double[][] a, double[][] b) {
+        if (!areEqual(a, b)) return null;
 
         int m = a.length;
         int n = a[0].length;
@@ -115,8 +112,8 @@ public final class Matrix {
         return result;
     }
 
-    public static double[][] matricesDifference(double[][] a, double[][] b) {
-        if (areMatricesEqual(a, b)) return null;
+    public static double[][] difference(double[][] a, double[][] b) {
+        if (areEqual(a, b)) return null;
         int m = a.length;
         int n = a[0].length;
 
@@ -131,7 +128,7 @@ public final class Matrix {
         return result;
     }
 
-    public static double[][] matricesProduct(double[][] a, double[][] b) {
+    public static double[][] product(double[][] a, double[][] b) {
         if (!isMatrix(a) || !isMatrix(b)) return null;
 
         int m = a.length;
@@ -153,7 +150,7 @@ public final class Matrix {
             for (int j = 0; j < nB; j++) {
                 double[] bColumn = getColumn(b, j);
                 log.debug("bColumn: {}", bColumn);
-                double sum = getSum(a[i], bColumn);
+                double sum = sumOfProducts(a[i], bColumn);
                 log.debug("sum: {}", sum);
                 result[i][j] = sum;
             }
@@ -162,7 +159,7 @@ public final class Matrix {
         return result;
     }
 
-    private static double getSum(double[] aRow, double[] bCol) {
+    private static double sumOfProducts(double[] aRow, double[] bCol) {
         double sum = 0;
         for (int i = 0; i < aRow.length; i++) {
             sum += aRow[i] * bCol[i];
@@ -171,7 +168,7 @@ public final class Matrix {
         return sum;
     }
 
-    private static double[] getColumn(double[][] arr, int colIndex) {
+    public static double[] getColumn(double[][] arr, int colIndex) {
         int length = arr.length;
         double[] column = new double[length];
         for (int i = 0; i < length; i++) {
@@ -179,5 +176,13 @@ public final class Matrix {
         }
 
         return column;
+    }
+
+    public static double[][] power(double[][] a, int degree) {
+        for (int i = 0; i < degree; i++) {
+            a = product(a, a);
+        }
+        
+        return a;
     }
 }

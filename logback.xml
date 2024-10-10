@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <property name="LOGS" value="./logs" />
+    <property name ="APP_NAME" value="dsa" />
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%d{ISO8601}] [%magenta(%t)] [%magenta(%C)]: \n[%highlight(%-5level)]: %cyan(%msg%n%throwable)</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="" level="info" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <logger name="dsa.AppTest" level="info" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="Console" />
+    </root>
+</configuration>
