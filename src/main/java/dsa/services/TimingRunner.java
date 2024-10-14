@@ -11,27 +11,6 @@ import java.util.function.Function;
 public class TimingRunner {
     public TimingRunner() {}
 
-    public static <T> T measuredRun(Function<T, T> func, T input) {
-        log.info("Measuring running time");
-
-        Instant now = Instant.now();
-        T result = func.apply(input);
-        Duration delta = Duration.between(now, Instant.now());
-        logTime(delta);
-
-        return result;
-    }
-
-    public static <T> T measuredRun(BiFunction<T, T, T> func, T inputA, T inputB) {
-        log.info("Measuring running time");
-
-        Instant now = Instant.now();
-        T result = func.apply(inputA, inputB);
-        Duration delta = Duration.between(now, Instant.now());
-        logTime(delta);
-
-        return result;
-    }
 
     private static void logTime(Duration delta) {
         double deltaDN = delta.toNanos()/1000000.0;
@@ -47,5 +26,60 @@ public class TimingRunner {
         else {
             log.info("Function ran for {} ms", deltaDN);
         }
+    }
+
+    public static <T> T measuredRun(Function<T, T> func, T input) {
+        log.info("Measuring running time");
+
+        Instant now = Instant.now();
+        T result = func.apply(input);
+        Duration delta = Duration.between(now, Instant.now());
+        logTime(delta);
+
+        return result;
+    }
+
+    public static Double[][] measuredRun(BiFunction<Double[][], Double[][], Double[][]> biFunc, Double[][] inputA, Double[][] inputB) {
+        log.info("Measuring running time");
+
+        Instant now = Instant.now();
+        Double[][] result = biFunc.apply(inputB, inputA);
+        Duration delta = Duration.between(now, Instant.now());
+        logTime(delta);
+
+        return result;
+    }
+
+    public static Double[][] measuredRun(BiFunction<Double[][], Integer, Double[][]> biFunc, Integer inputA, Double[][] inputB) {
+        log.info("Measuring running time");
+
+        Instant now = Instant.now();
+        Double[][] result = biFunc.apply(inputB, inputA);
+        Duration delta = Duration.between(now, Instant.now());
+        logTime(delta);
+
+        return result;
+    }
+
+    public static double[][] measuredRun(BiFunction<double[][], double[][], double[][]> biFunc, double[][] inputA, double[][] inputB) {
+        log.info("Measuring running time");
+
+        Instant now = Instant.now();
+        double[][] result = biFunc.apply(inputB, inputA);
+        Duration delta = Duration.between(now, Instant.now());
+        logTime(delta);
+
+        return result;
+    }
+
+    public static double[][] measuredRun(BiFunction<double[][], Integer, double[][]> biFunc, int inputA, double[][] inputB) {
+        log.info("Measuring running time");
+
+        Instant now = Instant.now();
+        double[][] result = biFunc.apply(inputB, inputA);
+        Duration delta = Duration.between(now, Instant.now());
+        logTime(delta);
+
+        return result;
     }
 }

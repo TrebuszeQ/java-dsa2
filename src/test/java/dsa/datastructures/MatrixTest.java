@@ -139,10 +139,11 @@ public class MatrixTest extends TestCase {
         };
 
         BiFunction<double[][], Integer, double[][]> biFunc = Matrix::power;
-        double[][] result = TimingRunner.measuredRun(biFunc, new Integer(2), matrixArrA);
+        double[][] result = TimingRunner.measuredRun(biFunc, 2, matrixArrA);
         double[][] expectedResult = {
                 {1, -2},
                 {6, -3}
         };
+        assertTrue(Arrays.deepEquals(result, expectedResult));
     }
 }

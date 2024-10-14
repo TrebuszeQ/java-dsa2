@@ -179,7 +179,7 @@ public final class Matrix {
     }
 
     public static double[][] power(double[][] a, int degree) {
-        for (int i = 0; i < degree; i++) {
+        for (int i = 0; i < degree - 1; i++) {
             a = product(a, a);
         }
         
