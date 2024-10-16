@@ -131,6 +131,28 @@ public class MatrixTest extends TestCase {
         };
         assertTrue(Arrays.deepEquals(result, expectedProduct));
     }
+
+    public void testKroneckersProductValid() {
+        double[][] matrixArrA = {
+                {3, 2},
+                {1, -3}
+        };
+        double[][] matrixArrB = {
+                {1, 2, -2},
+                {1, 3, 0},
+                {1, 3, 0}
+        };
+
+        BiFunction<double[][], double[][], double[][]> biFunc = Matrix::kroneckerProduct;
+        double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] expectedProduct = {
+                {3, 6, -6, 2, 4, -4},
+                {3, 9, 0, 2, 6, 0},
+                {1, 2, -2, -3, -6, 6},
+                {1, 3, 0, -3, -9, 0}
+        };
+        assertTrue(Arrays.deepEquals(result, expectedProduct));
+    }
     
     public void testPowerValid() {
         double[][] matrixArrA = {
@@ -146,4 +168,20 @@ public class MatrixTest extends TestCase {
         };
         assertTrue(Arrays.deepEquals(result, expectedResult));
     }
+
+    public void testPowerValid2() {
+        double[][] matrixArrA = {
+                {2, -1},
+                {3, 0}
+        };
+
+        BiFunction<double[][], Integer, double[][]> biFunc = Matrix::power;
+        double[][] result = TimingRunner.measuredRun(biFunc, 3, matrixArrA);
+        double[][] expectedResult = {
+                {-4, -1},
+                {3, -6}
+        };
+        assertTrue(Arrays.deepEquals(result, expectedResult));
+    }
+
 }

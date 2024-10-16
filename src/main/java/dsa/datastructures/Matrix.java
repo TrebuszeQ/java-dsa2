@@ -2,6 +2,9 @@ package dsa.datastructures;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
  * Mathematical matrix where m stands for rows and n stands for columns.
  * */
@@ -178,11 +181,54 @@ public final class Matrix {
         return column;
     }
 
+    public static double[][] kroneckerProduct(double[][] a, double[][] b) {
+        if (!isMatrix(a) || !isMatrix(b)) return null;
+
+        int m = a.length;
+        int n = a[0].length;
+
+        int mB = b.length;
+        int nB = b[0].length;
+
+        int mC = m * mB;
+        int nC = n * nB;
+        double[][] result = new double[mC][nC];
+
+        for (int i = 0; i < mC; i++) {
+
+            for (int j = 0; j < nC; j++) {
+                if (n > nB) {
+                    result[i][j] = productDouble(b, a[i][j]);
+                }
+                else {
+                    result[i][j] =
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    private static double productDouble(double[][] matrix, double num) {
+        AtomicReference<Double> result = new AtomicReference<>(num);
+
+        Arrays.stream(matrix).forEach(subMatrix -> {
+            Arrays.stream(subMatrix).forEach(doubleNum -> {
+                double partial = doubleNum * num;
+                result.set(result.get() + partial);
+            });
+        });
+
+        return result.get();
+    }
+
     public static double[][] power(double[][] a, int degree) {
+        double[][] result = a.clone();
         for (int i = 0; i < degree - 1; i++) {
-            a = product(a, a);
+            result = product(result, a);
         }
         
-        return a;
+        return result;
     }
 }
