@@ -144,7 +144,7 @@ public class MatrixTest extends TestCase {
         };
 
         BiFunction<double[][], double[][], double[][]> biFunc = Matrix::kroneckerProduct;
-        double[][] result = TimingRunner.measuredRun(biFunc, matrixArrA, matrixArrB);
+        double[][] result = TimingRunner.measuredRun(biFunc, matrixArrB, matrixArrA);
         double[][] expectedProduct = {
                 {3, 6, -6, 2, 4, -4},
                 {3, 9, 0, 2, 6, 0},

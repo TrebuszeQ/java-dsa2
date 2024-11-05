@@ -198,7 +198,7 @@ public final class Matrix {
 
             for (int j = 0; j < nC; j++) {
                 if (n > nB) {
-                    result[i][j] = productDouble(b, a[i][j]);
+                    result[i][j] =
                 }
                 else {
                     result[i][j] =
